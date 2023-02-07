@@ -7,12 +7,12 @@ const inter = Inter({
   weight: '400',
 })
 
-export default function Home() {
+export default function Contacts() {
   return (
     <div className='max-w-5xl m-auto flex flex-col items-center justify-evenly'>
       <NavMenu/>
       <Breadcrumbs/>
-      О нас
+      Акции
     </div>
   )
 }

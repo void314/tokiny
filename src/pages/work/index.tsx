@@ -1,3 +1,5 @@
+import Breadcrumbs from '@/components/breadcrumbs/breadcrumbs'
+import NavMenu from '@/components/nav-menu/nav-menu'
 import { Inter } from '@next/font/google'
 
 const inter = Inter({
@@ -7,8 +9,10 @@ const inter = Inter({
 
 export default function Work() {
   return (
-    <div className={ inter.className }>
-        Работа
+    <div className='max-w-5xl m-auto flex flex-col items-center justify-evenly'>
+      <NavMenu/>
+      <Breadcrumbs/>
+      Работа
     </div>
   )
 }
