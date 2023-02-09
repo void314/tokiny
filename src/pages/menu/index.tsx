@@ -4,7 +4,6 @@ import Card from '@/components/product-card/product-card'
 import { Inter } from '@next/font/google'
 
 import { productAPI } from '@/services/ProductService'
-import { create } from 'domain'
 import { IProduct } from '@/models/IProduct'
 
 const inter = Inter({
@@ -21,7 +20,7 @@ export default function Memu() {
 
   const handelCreate = async () => {
     const test: IProduct = {
-      "id": 7,
+      "id": 8,
       "title": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
       "price": 695,
       "description": "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
@@ -59,6 +58,7 @@ export default function Memu() {
     <div className='max-w-5xl m-auto flex flex-col items-center justify-evenly'>
       <NavMenu />
       <Breadcrumbs />
+      
       <button onClick={ handelCreate }>+++</button>
       <button onClick={ handelUpdate }>***</button>
       <button onClick={ handelDelete }>---</button>
@@ -67,7 +67,9 @@ export default function Memu() {
       <div className='flex flex-wrap items-center justify-between max-w-5xl'>
         {isLoading && <h1>Loading...</h1>}
         {error && <h1>Loading error</h1>}
-        {JSON.stringify(products, null, 2)}
+        {products && products.map(product => 
+          <Card image={product.image} title={product.title} price={product.price} />
+        )}
       </div>
     </div>
   )
