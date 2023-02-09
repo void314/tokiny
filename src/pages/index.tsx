@@ -2,23 +2,12 @@ import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import NavMenu from '@/components/nav-menu/nav-menu'
 import Breadcrumbs from '@/components/breadcrumbs/breadcrumbs'
-import { useAppDispatch, useAppSelector } from '@/hooks/redux'
-import { useEffect } from 'react'
-import { fetchUsers } from '@/redux/reducers/ActionCreators'
 import { userAPI } from '@/services/UserService'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const dispatch = useAppDispatch();
-  const { users } = useAppSelector(state => state.userReducer);
-  console.log("🚀 ~ file: index.tsx:14 ~ Home ~ users", users)
-
-  const {data : userlim, isLoading, error} = userAPI.useFetchAllUsersQuery(2);
-
-  useEffect(() => {
-    dispatch(fetchUsers())
-  }, [])
+  const {data : users, isLoading, error} = userAPI.useFetchAllUsersQuery(2);
 
   return (
     <>
@@ -36,7 +25,7 @@ export default function Home() {
         Главная
         {/* {JSON.stringify(users, null, 2)} */}
         ----------
-        {JSON.stringify(userlim, null, 2)}
+        {JSON.stringify(users, null, 2)}
       </div>
     </>
   )
