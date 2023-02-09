@@ -12,7 +12,6 @@ const Breadcrumbs = () => {
       }
       
       const breadcrumbMap: BreadcrumbItem[] = [
-        { path: '/', displayName: 'Home' },
         { path: '/about', displayName: 'О нас' },
         { path: '/contacts', displayName: 'Контакты' },
       ];
@@ -20,6 +19,7 @@ const Breadcrumbs = () => {
       const breadcrumbs = pathSegments.map((segment, index) => {
         const path = `/${pathSegments.slice(0, index + 1).join('/')}`;
         const breadcrumbItem = breadcrumbMap.find(item => item.path === path);
+        console.log("🚀 ~ file: breadcrumbs.tsx:23 ~ breadcrumbs ~ path", path)
         return breadcrumbItem ? breadcrumbItem : { path, displayName: segment };
       });
       
@@ -30,7 +30,7 @@ const Breadcrumbs = () => {
                 {pathSegments.length > 0 && <span>&gt;</span>}
 
             </React.Fragment>
-            {breadcrumbs.map((breadcrumb, index) => (
+            {pathSegments[0] !== '_error' && breadcrumbs.map((breadcrumb, index) => (
                 <React.Fragment key={breadcrumb.path}>
                     <Link href={`/${pathSegments.slice(0, index + 1).join('/')}`}>
                         {breadcrumb.displayName}
