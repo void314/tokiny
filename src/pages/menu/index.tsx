@@ -5,6 +5,9 @@ import { Inter } from '@next/font/google'
 
 import { productAPI } from '@/services/ProductService'
 import { IProduct } from '@/models/IProduct'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
+import { useEffect } from 'react'
+import { addToCart } from '@/redux/reducers/CartActions'
 
 const inter = Inter({
   subsets: ['cyrillic'],
@@ -16,7 +19,6 @@ export default function Memu() {
   const [createProduct, {}] = productAPI.useCreateProductMutation();
   const [updateProduct, {}] = productAPI.useUpdateProductMutation();
   const [deleteProduct, {}] = productAPI.useDeleteProductMutation();
-
 
   const handelCreate = async () => {
     const test: IProduct = {
@@ -54,11 +56,27 @@ export default function Memu() {
     await deleteProduct(test);
   }
 
+  const dispatch = useAppDispatch();
+  const { items } = useAppSelector(state => state.cartReducer);
+
+  useEffect(() => {
+    const test: IProduct = {
+      "id": 8,
+      "title": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+      "price": 695,
+      "description": "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+      "category": "jewelery",
+      "image": "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg"
+    }
+
+    dispatch(addToCart({item: test, count: 1 }))
+  }, [])
+
   return (
     <div className='max-w-5xl m-auto flex flex-col items-center justify-evenly'>
       <NavMenu />
       <Breadcrumbs />
-      
+
       <button onClick={ handelCreate }>+++</button>
       <button onClick={ handelUpdate }>***</button>
       <button onClick={ handelDelete }>---</button>
@@ -68,7 +86,7 @@ export default function Memu() {
         {isLoading && <h1>Loading...</h1>}
         {error && <h1>Loading error</h1>}
         {products && products.map(product => 
-          <Card image={product.image} title={product.title} price={product.price} />
+          <Card data={product} />
         )}
       </div>
     </div>
