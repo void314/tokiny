@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { IProduct } from '@/models/IProduct';
-import { addItem, decCount, incCount, removeItem } from '@/redux/reducers/cartSlice';
+import { decCount, incCount, removeItem } from '@/redux/reducers/cartSlice';
 import React from 'react'
 
 export default function ShoppingCart() {
@@ -10,7 +9,7 @@ export default function ShoppingCart() {
     return (
         <div>
             {items.map(item => (
-                <div>
+                <div key={item.item.id}>
                     {item.item.id}
                     {item.item.title}
                     {item.count}
