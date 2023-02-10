@@ -70,7 +70,7 @@ export default function Memu() {
         {isLoading && <h1>Loading...</h1>}
         {error && <h1>Loading error</h1>}
         {products && products.map(product => 
-          <Card image={product.image} title={product.title} price={product.price} />
+          <Card data={product} key={product.id} />
         )}
       </div>
     </div>
