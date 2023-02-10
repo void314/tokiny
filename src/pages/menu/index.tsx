@@ -5,6 +5,7 @@ import { Inter } from '@next/font/google'
 
 import { productAPI } from '@/services/ProductService'
 import { IProduct } from '@/models/IProduct'
+import ShoppingCart from '@/components/shoping-cart/shoping-cart'
 
 const inter = Inter({
   subsets: ['cyrillic'],
@@ -63,6 +64,7 @@ export default function Memu() {
       <button onClick={ handelUpdate }>***</button>
       <button onClick={ handelDelete }>---</button>
 
+      <ShoppingCart/>
       Меню
       <div className='flex flex-wrap items-center justify-between max-w-5xl'>
         {isLoading && <h1>Loading...</h1>}
